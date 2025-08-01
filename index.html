@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeuraFeed</title>
+</head>
+
+<body>
+    <form>
+        <label for="nomeEmpresa">Nome da Empresa:</label>
+        <input type="text" id="nomeEmpresa" name="nomeEmpresa" placeholder="Digite o nome da sua empresa" required>
+
+        <label for="publicoAlvo">Público Alvo:</label>
+        <input type="text" id="publicoAlvo" name="publicoAlvo" placeholder="Qual o público alvo da sua empresa?"
+            required>
+
+        <label for="objetivoEmpresa">Objetivo da Empresa:</label>
+        <textarea id="objetivoEmpresa" name="objetivoEmpresa" placeholder="Qual o objetivo principal da sua empresa?"
+            required></textarea>
+
+        <label for="logoEmpresa">Logo da sua empresa (em png com fundo transparente)</label>
+        <input type="file" id="logoEmpresa" name="logoEmpresa">
+
+        <label id="corEmpresa" for="corEmpresa">Cor predominante</label>
+        <input type="color" id="corEmpresa" name="corEmpresa">
+
+        <button class="btnEnviar" type="button">Enviar</button>
+
+    </form>
+
+    <!-- ------------------------------- POPUP ------------------------------- -->
+
+
+    <div class="popupRender" id="popupRender" style="display:none;">
+        <div class="popupContent">
+
+            <button class="popupClose" id="closePopup">&times;</button>
+            <div class="canvasDiv">
+                <div class="renderTemplate" id="renderTemplate">
+                    <div class="group">
+                        <img src="" alt="" class="logoImgRender">
+                        <span class="title"></span>
+                        <div class="divisor"></div>
+                        <span class="subTitle"></span>
+                        <img class="generatedImage" style="display: none;" />
+                    </div>
+                </div>
+                <div class="btnArea">
+                    <button type="button" class="btnBaixar">Baixar</button>
+                    <button class="gerarNovamente">Gerar Novamente</button>
+                </div>
+            </div>
+            <img src="src/loading.gif" alt="" class="loading">
+
+
+        </div>
+    </div>
+
+
+</body>
+
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+<script src="main.js"></script>
+
+<style>
+    body {
+        font-family: 'Rubik', sans-serif;
+        background-color: #f9f9f9;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        color: #333;
+    }
+
+
+
+    form {
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        width: 400px;
+        margin-bottom: 30px;
+    }
+
+    .loading {
+        display: none;
+        width: 300px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: 500;
+        color: #444;
+    }
+
+    input[type="text"],
+    textarea {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 20px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        box-sizing: border-box;
+        font-family: 'Rubik', sans-serif;
+        transition: border-color 0.3s ease;
+    }
+
+    input[type="text"]:focus,
+    textarea:focus {
+        border-color: #007bff;
+        outline: none;
+    }
+
+    textarea {
+        resize: vertical;
+        height: 120px;
+    }
+
+    button {
+        background-color: #007bff;
+        color: white;
+        padding: 14px 22px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 18px;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        font-family: 'Rubik', sans-serif;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    button:hover {
+        background-color: #0056b3;
+        transform: translateY(-2px);
+    }
+
+    button:active {
+        transform: translateY(0);
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .btnArea{
+        display: 'flex';
+        margin-top: 10px;
+    }
+
+    .btnEnviar {
+        margin-bottom: 15px;
+    }
+
+    .btnBaixar {
+        display: none;
+    }
+
+
+    .popupRender {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.6);
+        /* fundo escuro e transparente */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+    }
+
+    .popupContent {
+        background: #fff;
+        padding: 32px 24px;
+        border-radius: 12px;
+        position: relative;
+        min-width: 320px;
+        min-height: 160px;
+        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+    }
+
+    .popupClose {
+        position: absolute;
+        top: 30px;
+        right: 30px;
+        font-size: 24px;
+        color: #333;
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+</style>
+
+</html>
