@@ -1,5 +1,4 @@
-// src/utils/constants.js
-export const API_KEY = process.env.ApiKeyGeminiDev;
+export const API_KEY = 'COLOQUE_SUA_CHAVE_AQUI';
 
 export const API_URLS = {
   text: `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent?key=${API_KEY}`,
