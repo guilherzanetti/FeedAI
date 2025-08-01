@@ -1,4 +1,6 @@
-const apiKey = '';
+const api_Key = process.env.ApiKeyGeminiDev;
+
+const apiKey = api_Key;
 const apiTextUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent?key=${apiKey}`;
 const apiImageUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-preview-image-generation:generateContent?key=${apiKey}`;
 
