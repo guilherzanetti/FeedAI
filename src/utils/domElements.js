@@ -1,6 +1,5 @@
 // src/utils/domElements.js
 export const dom = {
-  // Adicione todos os seus seletores aqui
   popupRender: document.getElementById('popupRender'),
   closePopup: document.getElementById('closePopup'),
   btnEnviar: document.querySelector(".btnEnviar"),

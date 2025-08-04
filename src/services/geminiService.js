@@ -3,13 +3,13 @@ import { API_URLS } from "../utils/constants.js";
 // Funções de chamada à API
 
 const apiTextUrl = API_URLS.text;
-// const apiImageUrl = API_URLS.IMAGE_API;
+const apiImageUrl = API_URLS.image;
 
 // Variável de usuário
 var user = {
-    nome: "",
-    publicoAlvo: "",
-    objetivo: ""
+    nome: "T2S",
+    publicoAlvo: "Desenvolvedores e empresas de tecnologia",
+    objetivo: "Desenvolver soluções inovadoras e eficientes"
 };
 
 // Variáveis globais
@@ -154,3 +154,5 @@ async function fetchAndProcessText(url, prompt) {
 //resultado: "geminiServiceAPI.getAiSubTitleResponse()" -> sucesso em resposta
 //resultado: "geminiServiceAPI.getAiImageResponse()" -> falha em resposta **Configurar a entrega da: apiImageUrl**
 //geminiServiceAPI.getAiImageResponse();
+
+geminiServiceAPI.getAiTextResponse();
