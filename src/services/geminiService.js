@@ -6,33 +6,36 @@ const apiTextUrl = API_URLS.text;
 const apiImageUrl = API_URLS.image;
 
 // Variável de usuário
-var user = {
+export var user = {
     nome: "T2S",
     publicoAlvo: "Desenvolvedores e empresas de tecnologia",
     objetivo: "Desenvolver soluções inovadoras e eficientes"
 };
 
 // Variáveis globais
-var AIwrite = "";
-var AIimage = "";
+var titleText = "";
+var subTitleText = "";
 var promptDeImg = "";
-
+var captionImage = "";
 
 const geminiServiceAPI = {
     async getAiTextResponse() {
         const prompt = `Gere apenas 1 frase curta e impactante para a empresa ${user.nome}, no estilo de chamada para redes sociais, relacionada ao publico-alvo: ${user.publicoAlvo} e objetivo: ${user.objetivo}. A frase deve ser direta, instigante e profissional — sem explicações ou texto adicional, sem negrito ou decorações no texto. Apenas a frase mas adapte ao nicho`;
-        AIwrite = await fetchAndProcessText(apiTextUrl, prompt);
-        // templates[0].title = AIwrite;
-        // templates[1].title = AIwrite;
-        console.log('Resposta da API de texto:', AIwrite);
+        titleText = await fetchAndProcessText(apiTextUrl, prompt);
+        // templates[0].title = titleText;
+        // templates[1].title = titleText;
+        console.log('Resposta da API de texto:', titleText);
     },
 
     async getAiSubTitleResponse() {
-        const prompt = `Gere apenas 1 subtitulo com base nesse titulo ${AIwrite} a e impactante para a empresa ${user.nome}, no estilo de chamada para redes sociais, relacionada ao publico-alvo: ${user.publicoAlvo} e objetivo: ${user.objetivo}. A frase deve ser direta, instigante e profissional e não pode ser genérica — sem explicações ou texto adicional, sem negrito ou decorações no texto. Apenas a frase mas adapte ao nicho`;
-        const subTitleText = await fetchAndProcessText(apiTextUrl, prompt);
-        // templates[0].subTitle = subTitleText;
-        // templates[1].subTitle = subTitleText;
-        console.log('Resposta da API de texto:', subTitleText);
+        const prompt = `Gere apenas 1 subtitulo com base nesse titulo ${titleText} a e impactante para a empresa ${user.nome}, no estilo de chamada para redes sociais, relacionada ao publico-alvo: ${user.publicoAlvo} e objetivo: ${user.objetivo}. A frase deve ser direta, instigante e profissional e não pode ser genérica — sem explicações ou texto adicional, sem negrito ou decorações no texto. Apenas a frase mas adapte ao nicho`;
+        subTitleText = await fetchAndProcessText(apiTextUrl, prompt);
+    
+    },
+
+    async getCaptionForImage() {
+        const prompt = `Gere uma legenda no formato para instagram com base nesse tema ${titleText} e faça uma chama para ação ao final. A legenda deve ser direta, instigante e profissional e não pode ser genérica — Também mencione o nome da empresa ${user.nome}. Para você ter mais detalhes sobre a empresa, o publico-alvo é: ${user.publicoAlvo} e o objetivo é: ${user.objetivo}. Coloque as melhores hashtags relacionadas ao tema. A legenda deve ser impactant. Não deve ter decorações no texto.`;
+        captionImage = await fetchAndProcessText(apiTextUrl, prompt);
     },
 
     async getAiImageResponse() {
@@ -136,7 +139,7 @@ async function fetchAndProcessText(url, prompt) {
         }
 
         const result = await response.json();
-        console.log('Resposta completa da API de texto:', result.candidates[0].content.parts[0].text);
+        // console.log('Resposta completa da API de texto:', result.candidates[0].content.parts[0].text);
 
         return result.candidates[0].content.parts[0].text;
 
@@ -155,4 +158,12 @@ async function fetchAndProcessText(url, prompt) {
 //resultado: "geminiServiceAPI.getAiImageResponse()" -> falha em resposta **Configurar a entrega da: apiImageUrl**
 //geminiServiceAPI.getAiImageResponse();
 
-geminiServiceAPI.getAiTextResponse();
+
+// Teste de chamada das funções
+// await geminiServiceAPI.getAiTextResponse();
+// await geminiServiceAPI.getAiSubTitleResponse();   
+// await geminiServiceAPI.getCaptionForImage();
+
+// console.log("Titulo: " + titleText);
+// console.log("Subtitulo: " + subTitleText);
+// console.log("Legenda: " + captionImage);
